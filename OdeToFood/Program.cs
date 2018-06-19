@@ -16,11 +16,12 @@ namespace OdeToFood
         {
             BuildWebHost(args).Run();   //run the web server
         }
-
+        
         public static IWebHost BuildWebHost(string[] args) =>
-            // build the web server
+            //use Startup class for building the server
+            //configureServices and Configure methods are called startup method
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>() //use Startup class for building the server
+                .UseStartup<Startup>() //registering USeStartup class
                 .Build();
     }
 }
