@@ -1,4 +1,4 @@
-﻿namespace OdeToFood
+﻿namespace OdeToFood.Services
 {
     public interface IGreeter
     {
@@ -10,5 +10,6 @@
         {
             return "Greetings!";
         }
+
     }
 }
