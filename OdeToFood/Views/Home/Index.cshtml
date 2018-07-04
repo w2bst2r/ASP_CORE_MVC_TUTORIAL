@@ -13,10 +13,13 @@
           <tr> 
               <td>@restaurant.Id</td>
               <td>@restaurant.Name</td>  
-              <td><a href ="/home/details/@restaurant.Id">Details</a></td>
+              <td>
+                  <a href ="/home/details/@restaurant.Id">Details</a>
+                  <a asp-action="Details" asp-route-id ="@restaurant.Id">More</a> 
+              </td>              
           </tr>
         }
-    <br />
+    <br/>
         
     </table>
 </body>
