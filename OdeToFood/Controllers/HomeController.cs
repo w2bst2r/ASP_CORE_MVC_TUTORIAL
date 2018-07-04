@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OdeToFood.Models;
 using OdeToFood.Services;
+using OdeToFood.ViewModels;
 
 
 namespace OdeToFood.Controllers
@@ -12,6 +13,8 @@ namespace OdeToFood.Controllers
     public class HomeController : Controller
     {
         private IRestaurantData _restaurantData;
+
+        private IGreeter _greeter;
         /*      Remember, we registered the IRestaurantData service, so whenever IRestaurantData argument is needed,
                 an instance of IRestaurantData is created and passed automatically
         
@@ -22,9 +25,10 @@ namespace OdeToFood.Controllers
    
         //InMemoryRestaurantData restaurantData = new InMemoryRestaurantData();
         //New HomeController(restaurantData)
-        public HomeController(IRestaurantData restaurantData)
+        public HomeController(IRestaurantData restaurantData, IGreeter greeter)
         {
             _restaurantData = restaurantData;
+            _greeter = greeter;
         }
 
 /*         "" &&  /Home && /Home/Index 
@@ -36,9 +40,11 @@ namespace OdeToFood.Controllers
         
         public IActionResult Index()
         {
-            var model = _restaurantData.GetAll();//this return a list of restaurant objects
+            var model = new HomeIndexViewModel();
+            model.Restaurants = _restaurantData.GetAll();//this return a list of restaurant objects
+            model.CurrentMessage = _greeter.GetMessageOfTheDay();
             //return new ObjectResult(model);  we use that if we want don't want to use a view
-            return View( model); //This view is passed to razor view engine
+            return View(model); //This view is passed to razor view engine
         }
     }
 }
