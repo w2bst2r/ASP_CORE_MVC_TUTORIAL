@@ -46,5 +46,15 @@ namespace OdeToFood.Controllers
             //return new ObjectResult(model);  we use that if we want don't want to use a view
             return View(model); //This view is passed to razor view engine
         }
+
+        public IActionResult Details(int id)
+        {
+            var model = _restaurantData.Get(id);
+            if (model == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
+        }
     }
 }

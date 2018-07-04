@@ -21,6 +21,12 @@ namespace OdeToFood.Services
                 new Restaurant(3, "PizzaHut"),
             };
         }
+
+        public Restaurant Get(int id)
+        {
+            return _restaurantList.Find(r => r.Id == id);
+        }
+
         // get the restaurant list in an ordered fashion
         public IEnumerable<Restaurant> GetAll()
         {

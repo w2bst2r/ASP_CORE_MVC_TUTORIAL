@@ -19,6 +19,12 @@ namespace OdeToFood.Services
                 new Restaurant(3, "asdfwef"),
             };
         }
+
+        public Restaurant Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Restaurant> GetAll()
         {
             return _restaurantList.OrderBy(r => r.Name);
