@@ -16,10 +16,17 @@ namespace OdeToFood.Services
         {
             _restaurantList = new List<Restaurant>
             { 
-                new Restaurant(1, "Tipico"),
-                new Restaurant(2, "Milano"),
-                new Restaurant(3, "PizzaHut"),
+                new Restaurant(1, "Tipico",CuisineType.German),
+                new Restaurant(2, "Milano",CuisineType.Italian),
+                new Restaurant(3, "PizzaHut",CuisineType.Italian),
             };
+        }
+
+        public Restaurant Add(Restaurant restaurant)
+        {
+            restaurant.Id = _restaurantList.Max(r => r.Id) + 1;
+            _restaurantList.Add(restaurant);
+            return restaurant;
         }
 
         public Restaurant Get(int id)

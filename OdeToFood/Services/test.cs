@@ -14,10 +14,15 @@ namespace OdeToFood.Services
         {
             _restaurantList = new List<Restaurant>
             {
-                new Restaurant(1, "what"),
-                new Restaurant(2, "asdf"),
-                new Restaurant(3, "asdfwef"),
+                new Restaurant(1, "what",CuisineType.French),
+                new Restaurant(2, "asdf",CuisineType.German),
+                new Restaurant(3, "asdfwef",CuisineType.Italian),
             };
+        }
+
+        public Restaurant Add(Restaurant restaurant)
+        {
+            throw new NotImplementedException();
         }
 
         public Restaurant Get(int id)

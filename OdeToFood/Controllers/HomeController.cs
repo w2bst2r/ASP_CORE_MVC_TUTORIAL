@@ -56,5 +56,26 @@ namespace OdeToFood.Controllers
             }
             return View(model);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();//return view in Views/Home/Create
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Restaurant model)
+        {
+            if (ModelState.IsValid)
+            {     
+            _restaurantData.Add(model);
+            return RedirectToAction(nameof(Details), new { id = model.Id, foo = "bar" });
+            //return View("Details",newRestaurant);
+            }
+            else
+            {
+                return View(); 
+            }
+        }
     }
+    
 }

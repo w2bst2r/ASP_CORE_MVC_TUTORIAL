@@ -18,9 +18,30 @@ namespace OdeToFood
             create instance of the class Greeter and pass it to any method that needed as an argument */
             services.AddSingleton<IGreeter, Greeter>();
             //create instance of InMemoryRestaurantData and pass it to the controller
-            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
+            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
 
             services.AddMvc();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             /*    we don't need to pass the other parameters like app , env as they are
                 already passed implicitly by asp.net core framework*/
