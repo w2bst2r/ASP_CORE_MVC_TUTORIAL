@@ -22,7 +22,7 @@ namespace OdeToFood.Controllers
                 passed explicity to the constructor!! what the hell!! right?
                 InMemoryRestaurantData instance is passed as the service was registered. the instance passed is initialized
                 so it contains a list of restaurant objects.*/
-   
+
         //InMemoryRestaurantData restaurantData = new InMemoryRestaurantData();
         //New HomeController(restaurantData)
         public HomeController(IRestaurantData restaurantData, IGreeter greeter)
@@ -37,11 +37,11 @@ namespace OdeToFood.Controllers
         those stuff are the constructor of HomeController is executed, and as the constructor needs IRestaurantData
         parameter, the instance of the class that implements the interface IRestaurantData that we registered is 
         created which is InMemoryRestaurantData in this case and is passed to the constructor*/
-        
+
         public IActionResult Index()
         {
             var model = new HomeIndexViewModel();
-            model.Restaurants = _restaurantData.GetAll();//this return a list of restaurant objects
+            model.Restaurants = _restaurantData.GetAll(); //this return a list of restaurant objects
             model.CurrentMessage = _greeter.GetMessageOfTheDay();
             //return new ObjectResult(model);  we use that if we want don't want to use a view
             return View(model); //This view is passed to razor view engine
@@ -54,28 +54,30 @@ namespace OdeToFood.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
             return View(model);
         }
+
         [HttpGet]
         public IActionResult Create()
         {
-            return View();//return view in Views/Home/Create
+            return View(); //return view in Views/Home/Create
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Restaurant model)
         {
             if (ModelState.IsValid)
-            {     
-            _restaurantData.Add(model);
-            return RedirectToAction(nameof(Details), new { id = model.Id, foo = "bar" });
-            //return View("Details",newRestaurant);
+            {
+                _restaurantData.Add(model);
+                return RedirectToAction(nameof(Details), new {id = model.Id, foo = "bar"});
+                //return View("Details",newRestaurant);
             }
             else
             {
-                return View(); 
+                return View();
             }
         }
     }
-    
 }

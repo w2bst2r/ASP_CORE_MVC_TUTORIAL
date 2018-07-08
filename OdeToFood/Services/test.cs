@@ -14,9 +14,9 @@ namespace OdeToFood.Services
         {
             _restaurantList = new List<Restaurant>
             {
-                new Restaurant(1, "what",CuisineType.French),
-                new Restaurant(2, "asdf",CuisineType.German),
-                new Restaurant(3, "asdfwef",CuisineType.Italian),
+                new Restaurant(1, "what", CuisineType.French),
+                new Restaurant(2, "asdf", CuisineType.German),
+                new Restaurant(3, "asdfwef", CuisineType.Italian),
             };
         }
 
@@ -36,4 +36,3 @@ namespace OdeToFood.Services
         }
     }
 }
-

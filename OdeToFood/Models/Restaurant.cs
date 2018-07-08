@@ -9,16 +9,18 @@ namespace OdeToFood.Models
     public class Restaurant
     {
         public int Id { get; set; }
-        [Display(Name="Restaurant Name"),MinLength(5)]      
+
+        [Display(Name = "Restaurant Name"), MinLength(5)]
         public string Name { get; set; }
+
         [Display(Name = "Cuisine nationality")]
         public CuisineType Cuisine { get; set; }
 
         public Restaurant()
         {
-            
         }
-        public Restaurant(int Id, string Name,CuisineType Cuisine)
+
+        public Restaurant(int Id, string Name, CuisineType Cuisine)
         {
             this.Id = Id;
             this.Name = Name;

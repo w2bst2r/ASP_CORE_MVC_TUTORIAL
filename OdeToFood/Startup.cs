@@ -1,46 +1,37 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OdeToFood.Data;
 using OdeToFood.Services;
 
 namespace OdeToFood
 {
     public class Startup
     {
+        private IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         //this is where you add and register your services
         public void ConfigureServices(IServiceCollection services)
         {
-           /* AddSignleton means that only one instance of the service is created for the entine application
-            AddTransient creates an instance whenever someone needs the service
-            AddScoped creates an instance for every HTTP request
-            create instance of the class Greeter and pass it to any method that needed as an argument */
+            /* AddSignleton means that only one instance of the service is created for the entine application
+             AddTransient creates an instance whenever someone needs the service
+             AddScoped creates an instance for every HTTP request
+             create instance of the class Greeter and pass it to any method that needed as an argument */
             services.AddSingleton<IGreeter, Greeter>();
+            services.AddDbContext<OdeToFoodDbContext>(
+                options => options.UseSqlServer(_configuration.GetConnectionString("OdeToFood")));
             //create instance of InMemoryRestaurantData and pass it to the controller
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
 
             services.AddMvc();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             /*    we don't need to pass the other parameters like app , env as they are
@@ -49,11 +40,12 @@ namespace OdeToFood
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         //each parameter is called a service
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IGreeter greeter, ILogger<Startup> logger)
-        //by using interface IGreeter, we can later create a new class that implement the interface and pass it as an object
-        // suppose that a new instance of greeter was created and passed to Configure method
-        //it is like Configure(new Greeter())
-        {   
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IGreeter greeter,
+                ILogger<Startup> logger)
+            //by using interface IGreeter, we can later create a new class that implement the interface and pass it as an object
+            // suppose that a new instance of greeter was created and passed to Configure method
+            //it is like Configure(new Greeter())
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); //map url to default method
@@ -100,13 +92,13 @@ namespace OdeToFood
 //            });
         }
 
-        private void ConfigureRoutes(IRouteBuilder routeBuilder) { 
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
             //default router is defined at the first router
             // "" --> home/index && /x --> /x/index && /x/y --> /home/index
-            routeBuilder.MapRoute("Default","{controller=home}/{action=index}/{id?}");
+            routeBuilder.MapRoute("Default", "{controller=home}/{action=index}/{id?}");
 /*            // about --> about/address
             routeBuilder.MapRoute("about", "{controller=about}/{action=address}/{id?}");*/
-          
         }
     }
 }

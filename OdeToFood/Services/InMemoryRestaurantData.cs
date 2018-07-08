@@ -15,10 +15,10 @@ namespace OdeToFood.Services
         public InMemoryRestaurantData()
         {
             _restaurantList = new List<Restaurant>
-            { 
-                new Restaurant(1, "Tipico",CuisineType.German),
-                new Restaurant(2, "Milano",CuisineType.Italian),
-                new Restaurant(3, "PizzaHut",CuisineType.Italian),
+            {
+                new Restaurant(1, "Tipico", CuisineType.German),
+                new Restaurant(2, "Milano", CuisineType.Italian),
+                new Restaurant(3, "PizzaHut", CuisineType.Italian),
             };
         }
 

@@ -4,12 +4,12 @@
     {
         string GetMessageOfTheDay();
     }
+
     public class Greeter : IGreeter
     {
         public string GetMessageOfTheDay()
         {
             return "Greetings!";
         }
-
     }
 }
